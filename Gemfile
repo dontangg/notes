@@ -33,7 +33,27 @@ group :doc do
 end
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'bcrypt-ruby', '~> 3.1.2', :require => 'bcrypt'
+
+# Use RSpec for testing
+# Run `rake spec` to run tests once
+# Documentation on matchers: https://www.relishapp.com/rspec/rspec-expectations/v/3-0/docs/built-in-matchers
+gem "rspec-rails", :group => [:test, :development]
+
+group :test do
+  # Use factories instead of fixtures
+  # NOTE: this might need to be in the development group as well to generate factories instead of fixtures
+  gem "factory_girl_rails"
+
+  # For acceptance/integration tests
+  gem "capybara"
+
+  # Auto-run tests
+  gem "guard-rspec"
+
+  # If running guard on Mac OS X
+  # gem "rb-fsevent"
+end
 
 # Use unicorn as the app server
 # gem 'unicorn'
