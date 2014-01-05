@@ -3,9 +3,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -35,16 +32,21 @@ end
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2', :require => 'bcrypt'
 
-# Use RSpec for testing
-# Run `rake spec` to run tests once
-# Documentation on matchers: https://www.relishapp.com/rspec/rspec-expectations/v/3-0/docs/built-in-matchers
-gem "rspec-rails", :group => [:test, :development]
+# RSpec and FactoryGirl are in development so that their generators can run
+group :development, :test do
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
+
+  # Use RSpec for testing
+  # Run `rake spec` to run tests once
+  # Documentation on matchers: https://www.relishapp.com/rspec/rspec-expectations/v/3-0/docs/built-in-matchers
+  gem "rspec-rails", :group => [:test, :development]
+
+  # Use factories instead of fixtures
+  gem "factory_girl_rails"
+end
 
 group :test do
-  # Use factories instead of fixtures
-  # NOTE: this might need to be in the development group as well to generate factories instead of fixtures
-  gem "factory_girl_rails"
-
   # For acceptance/integration tests
   gem "capybara"
 
@@ -56,10 +58,19 @@ group :test do
 end
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn' unless RUBY_PLATFORM =~ /mingw32/i
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
+group :development do
+  # Use Capistrano for deployment
+  gem 'capistrano-rails', '~> 1.0.0'
+
+  gem 'capistrano-bundler'
+
+  # Add Capistrano rbenv tasks
+  #gem 'capistrano-rbenv', '~> 2.0'
+end
+
+gem 'pg', '~> 0.17.0', group: :production
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
