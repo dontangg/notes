@@ -39,15 +39,19 @@ before_fork do |server, worker|
   # we send it a QUIT.
   #
   # This enables 0 downtime deploys.
-  #old_pid = "#{pid}.oldbin"
+  old_pid_file = "#{pid}.oldbin"
   #old_pid = "#{server.config[:pid]}.oldbin"
-  #if File.exists?(old_pid) && server.pid != old_pid
-  #  begin
-  #    Process.kill("QUIT", File.read(old_pid).to_i)
-  #  rescue Errno::ENOENT, Errno::ESRCH
-  #    # someone else did our job for us
-  #  end
-  #end
+  if File.exists?(old_pid_file) && server.pid != old_pid
+    begin
+      old_pid = File.read(old_pid_file).to_i
+      server.logger.info("sending QUIT to #{old_pid}")
+
+      # kill the old unicorn master
+      Process.kill("QUIT", old_pid)
+    rescue Errno::ENOENT, Errno::ESRCH
+      # someone else did our job for us
+    end
+  end
 end
 
 after_fork do |server, worker|
