@@ -1,0 +1,25 @@
+$font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+$font-weight: 300;
+
+$cta-color: #17607d;
+
+body {
+  background: #e9ecee;
+  font-family: $font-family;
+  font-weight: $font-weight;
+  padding: 15px;
+  margin: 0;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 400;
+}
+
+p {
+  margin: 8px 0;
+}
+
+a {
+  color: $cta-color;
+}
+

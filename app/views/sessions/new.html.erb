@@ -1,13 +1,17 @@
-<h1>Log in</h1>
+<div id="sign-in">
+  <%= image_tag 'logo.png', width: 80 %>
+  <h1>notes</h1>
 
-<%= form_tag sessions_path do %>
-  <p>
-    <%= label_tag :email %><br />
-    <%= text_field_tag :email, params[:email] %>
-  </p>
-  <p>
-    <%= label_tag :password %><br />
-    <%= password_field_tag :password %>
-  </p>
-  <p class="button"><%= submit_tag "Log In" %></p>
-<% end %>
+  <%= form_tag sessions_path do %>
+    <p>
+      <%= email_field_tag :email, params[:email], placeholder: 'email' %>
+    </p>
+    <p>
+      <%= password_field_tag :password, nil, placeholder: 'password' %>
+    </p>
+    <p>
+      <%= submit_tag "sign in" %>
+    </p>
+    <%= link_to "sign up", sign_up_path, class: 'sign-up-link' %>
+  <% end %>
+</div>
