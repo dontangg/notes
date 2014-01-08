@@ -39,13 +39,13 @@ namespace :deploy do
       within release_path do
         pidfile = shared_path.join('pids', 'unicorn.pid')
 
-        # if the pid file exists then we need to stop the server first
+        # if the pid file exists then we need to restart the server
         if test "[ -f #{pidfile} ]"
-          execute :kill, "-s QUIT `cat #{pidfile}`"
+          execute :kill, "-USR2 `cat #{pidfile}`"
+        else
+          # start the server
+          execute :bundle, "exec unicorn_rails -c config/unicorn.rb -D"
         end
-
-        # start the server
-        execute :bundle, "exec unicorn_rails -c config/unicorn.rb -D"
       end
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
