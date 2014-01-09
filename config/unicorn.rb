@@ -11,6 +11,7 @@ timeout 30         # restarts workers that hang for 30 seconds
 
 if env == "production"
   root = "/home/app_user/apps/notes/current"
+
   pid "/home/app_user/apps/notes/shared/pids/unicorn.pid"
   listen "/tmp/unicorn.notes.sock"
 
@@ -39,8 +40,7 @@ before_fork do |server, worker|
   # we send it a QUIT.
   #
   # This enables 0 downtime deploys.
-  old_pid_file = "#{pid}.oldbin"
-  #old_pid = "#{server.config[:pid]}.oldbin"
+  old_pid_file = "#{server.config[:pid]}.oldbin"
   if File.exists?(old_pid_file) && server.pid != old_pid
     begin
       old_pid = File.read(old_pid_file).to_i
