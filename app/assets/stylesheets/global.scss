@@ -3,13 +3,18 @@ $font-weight: 300;
 
 $cta-color: #17607d;
 
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
 body {
   background: #e9ecee;
   font-family: $font-family;
   font-weight: $font-weight;
+  max-width: 320px;
+  margin: 0 auto;
   padding: 15px;
-  margin: 0;
-}
+ }
 
 h1, h2, h3, h4 {
   font-weight: 400;
