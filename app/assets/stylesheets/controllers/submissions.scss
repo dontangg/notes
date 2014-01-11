@@ -1,3 +1,22 @@
 // Place all the styles related to the submission controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.song-name {
+  font-size: 28px;
+}
+
+.artist-name {
+  font-size: 18px;
+}
+
+.song-list {
+  li + li {
+    margin-top: 10px;
+  }
+
+  .actions {
+    font-size: 18px;
+  }
+}
+
