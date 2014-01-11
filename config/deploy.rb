@@ -52,6 +52,23 @@ namespace :deploy do
     end
   end
 
+  desc 'Stop the application'
+  task :stop do
+    on roles(:app) do
+      within current_path do
+        pidfile = shared_path.join('pids', 'unicorn.pid')
+
+        # if the pid file exists then we need to restart the server
+        if test "[ -f #{pidfile} ]"
+          execute :kill, "-QUIT `cat #{pidfile}`"
+        end
+      end
+      # Your restart mechanism here, for example:
+      # execute :touch, release_path.join('tmp/restart.txt')
+    end
+
+  end
+
   after 'symlink:release', :symlink_nginx do
     # This will run on servers in groups of 3 and wait 10 seconds between groups
     on roles(:web), in: :groups, limit: 3, wait: 10 do
