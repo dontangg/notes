@@ -2,7 +2,7 @@ class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:edit, :update, :destroy]
 
   def index
-    @submissions = Submission.all
+    @submissions = current_user.submissions
   end
 
   def new
