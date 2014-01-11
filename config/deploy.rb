@@ -36,7 +36,7 @@ namespace :deploy do
   task :restart do
     # This will run on all app servers 1 at a time waiting 5 seconds between each one
     on roles(:app), in: :sequence, wait: 5 do
-      within release_path do
+      within current_path do
         pidfile = shared_path.join('pids', 'unicorn.pid')
 
         # if the pid file exists then we need to restart the server
