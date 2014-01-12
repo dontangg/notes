@@ -3,7 +3,7 @@
 <ul class='no-bull song-list'>
   <% @songs.each do |song| %>
     <li>
-      <div class='song-name'><%= song.song %></div>
+      <div class='song-name'><%= song.name %></div>
       <div class='artist-name'><%= song.artist %></div>
       <div class='actions'>
         <%= link_to 'edit', edit_song_path(song) %>

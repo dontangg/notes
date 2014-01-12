@@ -7,7 +7,7 @@ FactoryGirl.define do
   end
 
   factory :song do
-    song "Radioactive"
+    name "Radioactive"
     sequence(:artist) { |a| "Imaging #{a} Dragons" }
   end
 end

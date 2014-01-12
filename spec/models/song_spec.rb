@@ -5,10 +5,10 @@ describe Song do
 
   describe "validations" do
     it "requires that song is not empty" do
-      song.song = nil
+      song.name = nil
 
       song.save.should be_false
-      song.errors[:song].any?.should be_true
+      song.errors[:name].any?.should be_true
     end
 
     it "requires that artist is not empty" do
@@ -21,13 +21,13 @@ describe Song do
 
   describe "song creation" do
     it "verifies that songs can be successfully added" do
-      song.song.should_not be_empty
+      song.name.should_not be_empty
       song.artist.should_not be_empty
       song.save
 
       song.save.should be_true
       song.errors[:artist].any?.should be_false
-      song.errors[:song].any?.should be_false
+      song.errors[:name].any?.should be_false
     end
   end
 end
