@@ -1,4 +1,4 @@
-class Submission < ActiveRecord::Base
+class Song < ActiveRecord::Base
   belongs_to :user
 
   validates_presence_of :song
