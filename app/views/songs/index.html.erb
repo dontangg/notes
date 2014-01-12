@@ -1,0 +1,17 @@
+<h1>songs</h1>
+
+<ul class='no-bull song-list'>
+  <% @songs.each do |song| %>
+    <li>
+      <div class='song-name'><%= song.song %></div>
+      <div class='artist-name'><%= song.artist %></div>
+      <div class='actions'>
+        <%= link_to 'edit', edit_song_path(song) %>
+        or
+        <%= link_to 'delete', song, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'new song', new_song_path %>
