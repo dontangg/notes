@@ -6,7 +6,7 @@ FactoryGirl.define do
     password "secret"
   end
 
-  factory :submission do
+  factory :song do
     song "Radioactive"
     sequence(:artist) { |a| "Imaging #{a} Dragons" }
   end

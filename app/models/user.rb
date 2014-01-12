@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :submissions, dependent: :destroy
+  has_many :songs, dependent: :destroy
 
   attr_accessor :password
   before_save :encrypt_password

@@ -16,12 +16,12 @@ describe "Signing In" do
     user = create(:user)
 
     visit sign_in_path
-    page.should_not have_selector('#flashalert')
+    page.should_not have_selector('#flash-alert')
     fill_in "email", :with => user.email
     fill_in "password", :with => "bogus_password"
     click_button "sign in"
 
     current_path.should eq(sessions_path)
-    page.should have_selector('#flashalert')
+    page.should have_selector('#flash-alert')
   end
 end
