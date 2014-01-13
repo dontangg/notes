@@ -25,3 +25,6 @@ Desktop.ini
 
 # Vim
 *.swp
+
+# New Relic configuration file
+config/newrelic.yml
