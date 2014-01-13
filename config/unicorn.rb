@@ -5,6 +5,7 @@ env = ENV["RAILS_ENV"] || "development"
 
 worker_processes 2 # amount of unicorn workers to spin up
 
+# This is good for Rails and for New Relic
 preload_app true
 
 timeout 30         # restarts workers that hang for 30 seconds

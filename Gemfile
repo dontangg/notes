@@ -70,7 +70,13 @@ group :development do
   #gem 'capistrano-rbenv', '~> 2.0'
 end
 
-gem 'pg', '~> 0.17.0', group: :production
+group :production do
+  # Use Postgres
+  gem 'pg', '~> 0.17.0', group: :production
+
+  # Use New Relic for monitoring
+  gem 'newrelic_rpm'
+end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
