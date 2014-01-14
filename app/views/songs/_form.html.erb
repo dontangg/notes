@@ -1,5 +1,5 @@
 <%= form_for @song do |f| %>
-  <% if @song.errors.any? %>
+  <% if @song.errors.any? -%>
     <div class="error_messages">
       <h2>Form is invalid</h2>
       <ul>
@@ -17,5 +17,11 @@
     <%= f.label :artist, 'artist' %><br />
     <%= f.text_field :artist, autocapitalize: 'words' %>
   </p>
+  <% unless mobile_device? %>
+    <p>
+      <%= f.label :file, 'upload the file' %>
+      <%= f.file_field :file, accept: 'audio/*' %>
+    </p>
+  <% end %>
   <p class="button"><%= f.submit %></p>
 <% end %>

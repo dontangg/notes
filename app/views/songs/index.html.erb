@@ -10,6 +10,14 @@
         or
         <%= link_to 'delete', song, method: :delete, data: { confirm: 'Are you sure?' } %>
       </div>
+      <% if song.file_name.present? %>
+        <div class='audio-container'>
+          <audio controls>
+            <source src="<%= song.hls_url %>" type="audio/mpeg" />
+            <source src="<%= song.mp3_url %>" type="audio/mpeg" />
+          </audio>
+        </div>
+      <% end %>
     </li>
   <% end %>
 </ul>

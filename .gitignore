@@ -28,3 +28,6 @@ Desktop.ini
 
 # New Relic configuration file
 config/newrelic.yml
+
+# Amazon AWS configuration file
+config/aws.yml

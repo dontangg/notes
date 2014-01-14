@@ -13,16 +13,21 @@ class SongsController < ApplicationController
   end
 
   def create
-    sub = current_user.songs.build(song_params)
-    if sub.save
-      redirect_to root_url, :notice => "song added!"
+    song = current_user.songs.build(song_params)
+    song.upload(params[:song][:file]) if song.valid?
+
+    if song.save
+      redirect_to root_url, notice: "song added!"
     else
       render "new"
     end
   end
 
   def update
-    if @song.update(song_params)
+    @song.update_attributes(song_params)
+    @song.upload(params[:song][:file]) if @song.valid?
+
+    if @song.save
       redirect_to songs_url, notice: 'song was successfully updated.'
     else
       render action: 'edit'

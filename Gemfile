@@ -24,6 +24,12 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+# For reading meta-data on audio files. Read more: http://robinst.github.io/taglib-ruby/
+#gem 'taglib-ruby', '~> 0.6.0', :require => 'taglib'
+
+# Use the Amazon SDK
+gem 'aws-sdk', '~> 1.32.0'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
