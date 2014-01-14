@@ -11,8 +11,13 @@
 }
 
 .song-list {
-  li + li {
-    margin-top: 10px;
+  li:nth-child(even) {
+    background: #ddd;
+  }
+
+  li {
+    margin: 0 -15px;
+    padding: 15px;
   }
 
   .actions {
