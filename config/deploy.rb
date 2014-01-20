@@ -33,7 +33,7 @@ set :keep_releases, 5
 namespace :deploy do
 
   desc 'Restart application'
-  task :restart do
+  after :publishing, :restart do
     # This will run on all app servers 1 at a time waiting 5 seconds between each one
     on roles(:app), in: :sequence, wait: 5 do
       within current_path do
@@ -69,7 +69,8 @@ namespace :deploy do
 
   end
 
-  after 'symlink:release', :symlink_nginx do
+  desc 'Symlink the nginx conf file'
+  after 'symlink:release', 'symlink:nginx' do
     # This will run on servers in groups of 3 and wait 10 seconds between groups
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       target = "/etc/nginx/sites-enabled/notes"
@@ -92,6 +93,8 @@ namespace :deploy do
   #  end
   #end
 
-  after :finishing, 'deploy:cleanup'
+  after :finishing, :cleanup
 
 end
+
+

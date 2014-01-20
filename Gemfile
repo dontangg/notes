@@ -22,7 +22,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder', '~> 2.0'
 
 # For reading meta-data on audio files. Read more: http://robinst.github.io/taglib-ruby/
 #gem 'taglib-ruby', '~> 0.6.0', :require => 'taglib'
@@ -68,7 +68,7 @@ gem 'unicorn' unless RUBY_PLATFORM =~ /mingw32/i
 
 group :development do
   # Use Capistrano for deployment
-  gem 'capistrano-rails', '~> 1.0.0'
+  gem 'capistrano-rails', '~> 1.1.1'
 
   gem 'capistrano-bundler'
 
