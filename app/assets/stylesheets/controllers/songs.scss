@@ -12,11 +12,10 @@
 
 .song-list {
   li:nth-child(even) {
-    background: #ddd;
+    background: $alt-color;
   }
 
   li {
-    margin: 0 -15px;
     padding: 15px;
   }
 

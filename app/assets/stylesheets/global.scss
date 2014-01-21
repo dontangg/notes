@@ -1,7 +1,12 @@
 $font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 $font-weight: 300;
 
-$cta-color: #17607d;
+// Colors https://kuler.adobe.com/Copy-of-Longwood-Palette-2-color-theme-3277189/
+$cta-color: #ff9311;
+$alt-color: #ddd;
+$dark-color: #17607d;
+$link-color: #17607d;
+$light-forecolor: #eee;
 
 *, *:after, *:before {
   box-sizing: border-box;
@@ -12,24 +17,51 @@ body {
   font-family: $font-family;
   font-weight: $font-weight;
   max-width: 320px;
-  margin: 0 auto;
-  padding: 15px;
+  margin: 0;
+  padding: 0;
  }
 
 h1, h2, h3, h4 {
   font-weight: 400;
+  padding: 0 15px;
 }
 
 p {
   margin: 8px 0;
+  padding: 0 15px;
 }
 
 a {
-  color: $cta-color;
+  color: $link-color;
 }
 
 .no-bull {
   list-style: none;
   padding-left: 0;
+}
+
+#menu-btn {
+  -webkit-appearance: none;
+  background: #eee url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADoAAAA6CAMAAADWZboaAAAAP1BMVEVAQED///////9AQED19fX////19fVDQ0NAQEBCQkL///////+Li4uGhoaIiIhAQEBAQEBGRkZKSkpKSkpAQEC3Xk7IAAAAFHRSTlMAAAUGcXR2ipGSvszh4+nt7vX6/IwQPJoAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAADaGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4zLWMwMTEgNjYuMTQ1NjYxLCAyMDEyLzAyLzA2LTE0OjU2OjI3ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOkI2NzA3MTdFNTYyMDY4MTFBN0JBQzM5RTk4QjQ4ODFGIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjlFNTE5OEIwRTQyQzExRTE5OUVFREUxNDE2MUNBNDg5IiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjlFNEZDQjY2RTQyQzExRTE5OUVFREUxNDE2MUNBNDg5IiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzYgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoyQzQwMDI4RTFCMjA2ODExODIyQUI4ODFBQ0M0MkY2MSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCNjcwNzE3RTU2MjA2ODExQTdCQUMzOUU5OEI0ODgxRiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgQfpmkAAABhSURBVEjH7dLBFkAgFEXRlEiIyv9/K+Z3rfcYablnvmfHdK8zpKSkVy5sh9AeHKSTBO9GSLOGZkiLhhZIVw1dIB1SlWBNPaTWx1koegupUfV7yof5cOuUD3/44aeRkrZOT8SWQKHfSQwtAAAAAElFTkSuQmCC) no-repeat 4px 0;
+  background-size: 29px;
+  border: 1px solid #ddd;
+  height: 31px;
+  left: 5px;
+  position: absolute;
+  top: 3px;
+  width: 40px;
+
+  &:hover {
+    background-color: #999;
+  }
+}
+
+header {
+  background: $dark-color;
+  color: $light-forecolor;
+  font-size: 22px;
+  height: 38px;
+  position: relative;
+  text-align: center;
 }
 

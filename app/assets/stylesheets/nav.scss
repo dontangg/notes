@@ -1,0 +1,65 @@
+// TODO:
+// convert to slim
+
+$nav-text-color: #d1d1d1;
+$nav-highlighted-color: #666;
+
+nav {
+  color: $nav-text-color;
+  display: none;
+  float: left;
+  font-weight: 400;
+  height: 100%;
+  left: -260px;
+  position: fixed;
+  right: auto;
+  top: 0;
+  z-index: 1;
+
+  ul {
+    @extend .no-bull;
+    background: #444;
+    float: left;
+    height: 100%;
+    margin: 0;
+    width: 260px;
+
+    .user-nav {
+      background: no-repeat 15px 10px;
+      background-size: 33px;
+      border-bottom: 1px solid #222;
+      padding: 15px 15px 15px 60px;
+    }
+  }
+  li {
+    padding: 8px;
+  }
+
+  a {
+    color: $nav-text-color;
+    text-decoration: none;
+
+    &:hover, &.selected {
+      background: $nav-highlighted-color;
+    }
+  }
+
+  a, span {
+    display: block;
+    padding: 7px;
+  }
+
+  button {
+    -webkit-appearance: none;
+    background: transparent;
+    border: 0;
+    float: left;
+    height: 100%;
+    width: 59px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+

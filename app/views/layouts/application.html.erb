@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Notes</title>
-  <meta name="viewport" content="width=device-width" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,300,400italic,400,600italic,600,700italic,700,800italic,800" rel="stylesheet" type="text/css" />
@@ -12,12 +12,24 @@
 </head>
 <body>
 
-<div id="user_nav">
-  <% if current_user %>
-    <%= current_user.name %>
-    <%= link_to "Sign out", sign_out_path %>
-  <% end %>
-</div>
+<% if current_user %>
+  <nav id='menu'>
+    <ul>
+      <li class="user-nav" style="background-image:url('<%= gravatar_url(current_user.email, 66) %>')">
+        <%= current_user.name %>
+      </li>
+      <li>
+        <%= link_to "Sign out", sign_out_path %>
+      </li>
+    </ul>
+    <button id='hide-menu-btn'></button>
+  </nav>
+
+  <header>
+    <button id='menu-btn'></button>
+    notes
+  </header>
+<% end %>
 
 <% if flash.key?(:alert) %>
   <%= content_tag :div, flash[:alert], :id => "flash-alert" %>
