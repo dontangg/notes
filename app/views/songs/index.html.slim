@@ -1,0 +1,18 @@
+h1 songs
+
+ul.no-bull.song-list
+  - @songs.each do |song|
+    li
+      .song-name = song.name
+      .artist-name = song.artist
+      .actions
+        => link_to 'edit', edit_song_path(song)
+        | or
+        =< link_to 'delete', song, method: :delete, data: { confirm: 'Are you sure?' }
+      - if song.file_name.present?
+        .audio-container
+          audio(controls)
+            source src="<%= song.hls_url %>" type="audio/mpeg"
+            source src="<%= song.mp3_url %>" type="audio/mpeg"
+
+p = link_to 'new song', new_song_path

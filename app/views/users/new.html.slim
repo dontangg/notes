@@ -1,0 +1,29 @@
+h1 new account
+
+= form_for @user do |f|
+  - if @user.errors.any?
+    .error_messages
+      h2 Form is invalid
+      ul
+        - for message in @user.errors.full_messages
+          li = message
+  p
+    = f.label :name, 'name'
+    br
+    = f.text_field :name, autocapitalize: 'words'
+  p
+    = f.label :email, 'email'
+    br
+    = f.email_field :email
+  p
+    = f.label :password, 'password'
+    br
+    = f.password_field :password
+  p
+    = f.label :password_confirmation, 'confirm password'
+    br
+    = f.password_field :password_confirmation
+  p.button = f.submit 'create account'
+
+  p = link_to "sign in", sign_in_path
+

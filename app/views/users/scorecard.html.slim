@@ -1,0 +1,7 @@
+h1 scorecard
+
+ul.no-bull.scorecard
+  - for group in @groups
+    li
+      - for user in group
+        p #{user.name} submitted #{pluralize(user.songs.size, 'song')}
