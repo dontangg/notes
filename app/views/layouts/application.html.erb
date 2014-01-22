@@ -6,8 +6,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,300,400italic,400,600italic,600,700italic,700,800italic,800" rel="stylesheet" type="text/css" />
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -19,7 +19,17 @@
         <%= current_user.name %>
       </li>
       <li>
-        <%= link_to "Sign out", sign_out_path %>
+        <%= link_to_unless_current("my songs", { controller: "songs", action: "index" }) do %>
+          <span>my songs</span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to_unless_current("scorecard", { controller: "users", action: "scorecard" }) do %>
+          <span>scorecard</span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to "sign out", sign_out_path %>
       </li>
     </ul>
     <button id='hide-menu-btn'></button>

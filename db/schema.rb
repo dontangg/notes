@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140118220111) do
+ActiveRecord::Schema.define(version: 20140122010344) do
 
   create_table "songs", force: true do |t|
     t.string   "artist"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20140118220111) do
     t.string   "password_salt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "group_id"
   end
 
 end

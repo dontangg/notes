@@ -18,6 +18,28 @@ class UsersController < ApplicationController
     end
   end
 
+  def scorecard
+    users = User.order(:group_id, :name).includes(:songs)
+
+    @groups = []
+    groups_tmp = {} # temporary variable to make it easier to add people to groups
+    users.each do |user|
+      if user.group_id.nil?
+        @groups << [user]
+      else
+        group = groups_tmp[user.group_id]
+        p "HI"
+        p group
+        if group.nil?
+          group = []
+          @groups << group
+          groups_tmp[user.group_id] = group
+        end
+        group << user
+      end
+    end
+  end
+
   private
 
   def user_params

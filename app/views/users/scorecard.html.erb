@@ -1,0 +1,13 @@
+<h1>Scorecard</h1>
+
+<ul class='no-bull scorecard'>
+  <% for group in @groups %>
+    <li>
+      <% for user in group %>
+        <p>
+          <%= user.name %> submitted <%= pluralize(user.songs.size, 'song') %>
+        </p>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
