@@ -1,0 +1,18 @@
+h1 guess
+
+= form_for @attempt do |f|
+  ul.no-bull.song-list
+    - @songs.each do |song|
+      li
+        .song-name = song.name
+        .artist-name = song.artist
+        - if song.file_name.present?
+          .audio-container
+            audio(controls)
+              source src="<%= song.hls_url %>" type="audio/mpeg"
+              source src="<%= song.mp3_url %>" type="audio/mpeg"
+        = f.fields_for 'guess[]', @guess do |f2|
+          = f2.select :user_id, options_from_collection_for_select(@users, 'id', 'name')
+          = f2.hidden_field :song_id, value: song.id
+
+  p = submit_tag 'submit guess'

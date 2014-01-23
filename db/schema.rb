@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140122010344) do
+ActiveRecord::Schema.define(version: 20140122160455) do
+
+  create_table "attempts", force: true do |t|
+    t.integer "user_id"
+    t.integer "correct_count"
+  end
+
+  create_table "guesses", force: true do |t|
+    t.integer "attempt_id"
+    t.integer "song_id"
+    t.integer "user_id"
+  end
 
   create_table "songs", force: true do |t|
     t.string   "artist"
