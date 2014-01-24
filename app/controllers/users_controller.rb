@@ -28,8 +28,6 @@ class UsersController < ApplicationController
         @groups << [user]
       else
         group = groups_tmp[user.group_id]
-        p "HI"
-        p group
         if group.nil?
           group = []
           @groups << group

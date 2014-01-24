@@ -1,18 +1,23 @@
 h1 guess
 
 = form_for @attempt do |f|
+  /- if @attempt.errors.any?
+    .error_messages
+      h2 See errors below
+
   ul.no-bull.song-list
-    - @songs.each do |song|
+    = f.fields_for :guesses do |f2|
       li
-        .song-name = song.name
-        .artist-name = song.artist
-        - if song.file_name.present?
+        .song-name = f2.object.song.name
+        .artist-name = f2.object.song.artist
+        - if f2.object.song.file_name.present?
           .audio-container
             audio(controls)
-              source src="<%= song.hls_url %>" type="audio/mpeg"
-              source src="<%= song.mp3_url %>" type="audio/mpeg"
-        = f.fields_for 'guess[]', @guess do |f2|
-          = f2.select :user_id, options_from_collection_for_select(@users, 'id', 'name')
-          = f2.hidden_field :song_id, value: song.id
+              source src="#{f2.object.song.hls_url}" type="audio/mpeg"
+              source src="#{f2.object.song.mp3_url}" type="audio/mpeg"
+        = f2.collection_select :user_id, @users, :id, :name, { prompt: 'choose a person' }
+        - if f2.object.errors[:user_id].any?
+          .error you must choose a person
+        = f2.hidden_field :song_id
 
   p = submit_tag 'submit guess'
