@@ -6,7 +6,7 @@ class AttemptsController < ApplicationController
     @attempt = Attempt.new
 
     @songs.each do |song|
-      @attempt.guesses.build(song: song)
+      @attempt.guesses.build(song: song) unless song.user_id == current_user.id
     end
   end
 
