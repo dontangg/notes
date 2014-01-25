@@ -67,3 +67,12 @@ header {
   text-align: center;
 }
 
+#flash-notice {
+  background: $dark-color + #888;
+  padding: 10px 20px;
+}
+#flash-alert {
+  background: $cta-color + #333;
+  padding: 10px 20px;
+}
+

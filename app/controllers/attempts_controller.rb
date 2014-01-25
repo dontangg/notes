@@ -13,8 +13,18 @@ class AttemptsController < ApplicationController
   def create
     @attempt = Attempt.new(attempt_params)
 
+    if @attempt.valid?
+      songs = Song.all
+      correct_count = 0
+      @attempt.guesses.each do |guess|
+        correct_count += 1 if songs.any? {|s| s.user_id == guess.user_id && s.id && guess.song_id }
+      end
+
+      @attempt.correct_count = correct_count
+    end
+
     if @attempt.save
-      redirect_to new_attempt_url, notice: "You probably got some right!"
+      redirect_to new_attempt_url, notice: "You got #{@attempt.correct_count} right!"
     else
       @users = User.all
 
