@@ -30,4 +30,7 @@ h1 guess
 
         = f2.hidden_field :song_id
 
-  p = submit_tag 'submit guess'
+  - if @already_attempted_today
+    p You already guessesed today
+  p = submit_tag 'submit guess', {disabled: @already_attempted_today}
+

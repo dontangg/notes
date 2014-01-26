@@ -33,7 +33,8 @@ class AttemptsController < ApplicationController
     songs = Song.all
 
     # Get a list of all attempts (except ones that we recently failed to save because they were invalid)
-    prev_attempts = current_user.attempts.reject { |a| a.new_record? }
+    prev_attempts = current_user.group_attempts.reject { |a| a.new_record? }
+    @already_attempted_today = prev_attempts.last.created_at.today?
     attempt_count = prev_attempts.size
 
     # Make a list of all guesses (all songs)

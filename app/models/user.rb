@@ -12,6 +12,15 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates_format_of :email, with: /\A[^@\s]+@[-a-z0-9.]+\.[a-z]{2,}\z/, on: :create
 
+  def group_attempts
+    if self.group_id.present?
+      group_user_ids = User.where(group_id: self.group_id).pluck(:id)
+      Attempt.where(user_id:group_user_ids)
+    else
+      self.attempts
+    end
+  end
+
   def encrypt_password
     if password.present?
       self.password_salt = BCrypt::Engine.generate_salt
