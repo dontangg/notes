@@ -7,17 +7,27 @@ h1 guess
 
   ul.no-bull.song-list
     = f.fields_for :guesses do |f2|
+      - guess = f2.object
       li
-        .song-name = f2.object.song.name
-        .artist-name = f2.object.song.artist
-        - if f2.object.song.file_name.present?
+        .song-name = guess.song.name
+        .artist-name = guess.song.artist
+
+        - if guess.song.file_name.present?
           .audio-container
             audio(controls)
-              source src="#{f2.object.song.hls_url}" type="audio/mpeg"
-              source src="#{f2.object.song.mp3_url}" type="audio/mpeg"
-        = f2.collection_select :user_id, @users, :id, :name, { prompt: 'choose a person' }
-        - if f2.object.errors[:user_id].any?
-          .error you must choose a person
+              source src="#{guess.song.hls_url}" type="audio/mpeg"
+              source src="#{guess.song.mp3_url}" type="audio/mpeg"
+
+        = f2.collection_select :user_id, (guess.correct? ? [guess.user] : @users), :id, :name, { prompt: 'choose a person' }
+
+        - if guess.errors[:user_id].any?
+          .error You must choose a person
+
+        - if guess.correct?
+          div You got this one right!
+        - elsif guess.previously_guessed_names.present?
+          div You already guessed #{guess.previously_guessed_names}
+
         = f2.hidden_field :song_id
 
   p = submit_tag 'submit guess'
