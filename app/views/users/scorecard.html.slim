@@ -3,5 +3,13 @@ h1 scorecard
 ul.no-bull.scorecard
   - for group in @groups
     li
-      - for user in group
+      - for user in group[:users]
         p #{user.name} submitted #{pluralize(user.songs.size, 'song')}
+      - if group[:attempts].any?
+        h4 guesses
+        ol
+          - for attempt in group[:attempts]
+            li
+              div #{attempt.correct_count} of #{@song_count} correct
+              small #{time_ago_in_words(attempt.created_at)} ago
+

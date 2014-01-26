@@ -3,15 +3,23 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .scorecard {
-  li:nth-child(even) {
+  & > li:nth-child(even) {
     background: $alt-color;
   }
   li {
     padding: 15px;
   }
 
-  p {
+  & > p {
     padding: 0;
+  }
+
+  h4 {
+    margin: 0;
+  }
+
+  ol li {
+    padding: 5px 0;
   }
 }
 
