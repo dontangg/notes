@@ -30,7 +30,7 @@ class AttemptsController < ApplicationController
 
   def prepare_attempt
     @users = User.all
-    songs = Song.all
+    songs = Song.order('random()')
 
     # Get a list of all attempts (except ones that we recently failed to save because they were invalid)
     prev_attempts = current_user.group_attempts.reject { |a| a.new_record? }

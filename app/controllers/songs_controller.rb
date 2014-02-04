@@ -2,7 +2,7 @@ class SongsController < ApplicationController
   before_action :set_song, only: [:edit, :update, :destroy]
 
   def index
-    @songs = current_user.id == 3 ? Song.all : current_user.songs
+    @songs = current_user.id == 3 ? Song.order('random()') : current_user.songs
   end
 
   def new
