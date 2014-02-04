@@ -13,3 +13,4 @@ ul.no-bull.scorecard
               div #{attempt.correct_count} of #{@song_count} correct
               small #{time_ago_in_words(attempt.created_at)} ago
 
+p = link_to "new guess", new_attempt_url

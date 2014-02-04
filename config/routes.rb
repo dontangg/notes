@@ -5,7 +5,10 @@ Notes::Application.routes.draw do
   get "sign_up" => "users#new", as: "sign_up"
   get "scorecard" => "users#scorecard", as: "scorecard"
 
-  root to: "songs#index"
+  # This should be the root_url before the competition starts
+  #root to: "songs#index"
+
+  root to: "users#scorecard"
 
   resources :users
   resources :sessions
