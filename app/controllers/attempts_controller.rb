@@ -11,7 +11,7 @@ class AttemptsController < ApplicationController
       songs = Song.all
       correct_count = 0
       @attempt.guesses.each do |guess|
-        correct_count += 1 if songs.any? { |s| s.user_id == guess.user_id && s.id && guess.song_id }
+        correct_count += 1 if songs.any? { |s| s.user_id == guess.user_id && s.id == guess.song_id }
       end
 
       @attempt.correct_count = correct_count
@@ -29,7 +29,7 @@ class AttemptsController < ApplicationController
   private
 
   def prepare_attempt
-    @users = User.all
+    @users = User.order(:name)
     songs = Song.order('random()')
 
     # Get a list of all attempts (except ones that we recently failed to save because they were invalid)
