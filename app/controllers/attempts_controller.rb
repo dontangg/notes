@@ -49,7 +49,7 @@ class AttemptsController < ApplicationController
 
     songs.each do |song|
       # Only look at songs that current_user didn't submit
-      unless song.user_id == current_user.id
+      unless song.user_id == current_user.id || (current_user.group_id.present? && current_user.group_id == user_hash[song.user_id].group_id)
         # Build a guess for this song so that fields_for naturally iterates over it
         guess = has_guesses ? @attempt.guesses.find { |g| g.song_id == song.id } : @attempt.guesses.build(song: song)
 

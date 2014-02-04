@@ -20,8 +20,9 @@ class UsersController < ApplicationController
 
   def scorecard
     users = User.order(:group_id, :name).includes(:songs)
+    group_user_ids = current_user.group_id.nil? ? [current_user.id] : User.where(group_id: current_user.group_id).pluck(:id)
 
-    @song_count = Song.where.not(user_id: current_user.id).count
+    @song_count = Song.where.not(user_id: group_user_ids).count
 
     @groups = []
     groups_tmp = {} # temporary variable to make it easier to add people to groups
