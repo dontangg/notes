@@ -2,7 +2,8 @@ class SongsController < ApplicationController
   before_action :set_song, only: [:edit, :update, :destroy]
 
   def index
-    @songs = current_user.id == 3 ? Song.order('random()') : current_user.songs
+    competition = Competition.find_by(active:true)
+    @songs = current_user.id == 3 ? competition.songs.order('random()') : current_user.songs.where(competition_id:competition.id)
   end
 
   def new
@@ -14,6 +15,10 @@ class SongsController < ApplicationController
 
   def create
     song = current_user.songs.build(song_params)
+
+    competition = Competition.find_by(active:true)
+    song.competition_id = competition.id
+
     song.upload(params[:song][:file]) if song.valid?
 
     if song.save

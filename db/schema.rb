@@ -11,11 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140126054203) do
+ActiveRecord::Schema.define(version: 20150103220738) do
 
   create_table "attempts", force: true do |t|
     t.integer  "user_id"
     t.integer  "correct_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "competition_id"
+  end
+
+  create_table "competitions", force: true do |t|
+    t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -34,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140126054203) do
     t.datetime "updated_at"
     t.string   "file_name"
     t.string   "extension"
+    t.integer  "competition_id"
   end
 
   create_table "users", force: true do |t|

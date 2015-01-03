@@ -6,9 +6,10 @@ Notes::Application.routes.draw do
   get "scorecard" => "users#scorecard", as: "scorecard"
 
   # This should be the root_url before the competition starts
-  #root to: "songs#index"
+  root to: "songs#index"
 
-  root to: "users#scorecard"
+  # This should be the root_url after the competition starts
+  #root to: "users#scorecard"
 
   resources :users
   resources :sessions

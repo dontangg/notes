@@ -7,6 +7,9 @@ class AttemptsController < ApplicationController
   def create
     @attempt = current_user.attempts.build(attempt_params)
 
+    competition = Competition.find_by(active:true)
+    @attempt.competition_id = competition.id
+
     if @attempt.valid?
       songs = Song.all
       correct_count = 0

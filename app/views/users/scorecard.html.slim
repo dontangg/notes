@@ -4,7 +4,7 @@ ul.no-bull.scorecard
   - for group in @groups
     li
       - for user in group[:users]
-        p #{user.name} submitted #{pluralize(user.songs.size, 'song')}
+        p #{user.name} submitted #{pluralize(user.songs.where(competition_id:@competition.id).size, 'song')}
       - if group[:attempts].any?
         h4 guesses
         ol

@@ -1,5 +1,9 @@
 
 FactoryGirl.define do
+  factory :competition do
+    active false
+  end
+
   factory :user do
     name "John Appleseed"
     sequence(:email) { |n| "foo#{n}@example.com" }
