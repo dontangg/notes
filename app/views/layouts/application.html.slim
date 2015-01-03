@@ -16,9 +16,9 @@ html
         ul
           li.user-nav style="background-image:url('#{gravatar_url(current_user.email, 66)}')"
             = current_user.name
-          li
-            = link_to_unless_current("new guess", { controller: "attempts", action: "new" }) do
-              span new guess
+          /li
+          /  = link_to_unless_current("new guess", { controller: "attempts", action: "new" }) do
+          /    span new guess
           li
             = link_to_unless_current("scorecard", { controller: "users", action: "scorecard" }) do
               span scorecard
