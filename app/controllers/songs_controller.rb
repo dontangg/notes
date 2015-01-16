@@ -4,8 +4,8 @@ class SongsController < ApplicationController
   def index
     competition = Competition.find_by(active:true)
     # TODO: allow a specific user to see all the songs once all the songs have been submited to upload them
-    #@songs = current_user.id == 3 ? competition.songs.order('random()') : current_user.songs.where(competition_id:competition.id)
-    @songs = current_user.songs.where(competition_id:competition.id)
+    @songs = current_user.id == 3 ? competition.songs.order('random()') : current_user.songs.where(competition_id:competition.id)
+    #@songs = current_user.songs.where(competition_id:competition.id)
   end
 
   def new
