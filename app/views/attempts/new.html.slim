@@ -32,5 +32,6 @@ h1 guess
 
   - if @already_attempted_today
     p You already guessesed today
+  / NOTE: This link should only be available after the guessing has started
   p = submit_tag 'submit guess', {disabled: @already_attempted_today}
 
