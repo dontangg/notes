@@ -12,7 +12,7 @@ ul.no-bull.song-list
       - if song.file_name.present?
         .audio-container
           audio(controls)
-            source src="#{song.hls_url}" type="audio/mpeg"
+            source src="#{song.hls_url}" type="application/x-mpegURL"
             source src="#{song.mp3_url}" type="audio/mpeg"
 
 / NOTE: This link should only be active when people are allowed to submit songs
