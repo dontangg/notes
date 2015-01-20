@@ -31,7 +31,7 @@ h1 guess
         = f2.hidden_field :song_id
 
   - if @already_attempted_today
-    p You already guessesed today
+    p You already guessed today
   / NOTE: This link should only be available after the guessing has started
   p = submit_tag 'submit guess', {disabled: @already_attempted_today}
 
