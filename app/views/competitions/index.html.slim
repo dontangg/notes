@@ -1,0 +1,14 @@
+h1 competitions
+
+ul.no-bull.competition-list
+  - @competitions.each do |competition|
+    li
+      .competition-name = competition.name
+      .competition-detail = competition.active? ? "Active" : "Inactive"
+      .competition-detail = competition.guessing? ? "Guessing" : "Submitting"
+      .actions
+        => link_to 'edit', edit_competition_path(competition)
+        | or
+        =< link_to 'delete', competition, method: :delete, data: { confirm: 'Are you sure?' }
+
+p = link_to 'new competition', new_competition_path

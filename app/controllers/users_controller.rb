@@ -22,19 +22,17 @@ class UsersController < ApplicationController
     users = User.order(:group_id, :name).includes(:songs)
     group_user_ids = current_user.group_id.nil? ? [current_user.id] : User.where(group_id: current_user.group_id).pluck(:id)
 
-    @competition = Competition.find_by(active:true)
-
-    @song_count = @competition.songs.where.not(user_id: group_user_ids).count
+    @song_count = current_competition.songs.where.not(user_id: group_user_ids).count
 
     @groups = []
     groups_tmp = {} # temporary variable to make it easier to add people to groups
     users.each do |user|
       if user.group_id.nil?
-        @groups << { users: [user], attempts: user.attempts.where(competition_id:@competition.id) }
+        @groups << { users: [user], attempts: user.attempts.where(competition_id:current_competition.id) }
       else
         group = groups_tmp[user.group_id]
         if group.nil?
-          group = { users: [], attempts: user.group_attempts.where(competition_id:@competition.id) }
+          group = { users: [], attempts: user.group_attempts.where(competition_id:current_competition.id) }
           @groups << group
           groups_tmp[user.group_id] = group
         end

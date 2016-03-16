@@ -5,16 +5,13 @@ Notes::Application.routes.draw do
   get "sign_up" => "users#new", as: "sign_up"
   get "scorecard" => "users#scorecard", as: "scorecard"
 
-  # NOTE: This should be the root_url before the competition starts
-  #root to: "songs#index"
-
-  # NOTE: This should be the root_url after the competition starts
-  root to: "users#scorecard"
+  root to: "home#index"
 
   resources :users
   resources :sessions
   resources :songs
   resources :attempts
+  resources :competitions
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

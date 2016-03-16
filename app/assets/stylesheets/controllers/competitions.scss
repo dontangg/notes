@@ -1,0 +1,21 @@
+.competition-name {
+  font-size: 28px;
+}
+
+.competition-detail {
+  font-size: 18px;
+}
+
+.competition-list {
+  li:nth-child(even) {
+    background: $alt-color;
+  }
+
+  li {
+    padding: 15px;
+  }
+
+  .actions {
+    font-size: 18px;
+  }
+}

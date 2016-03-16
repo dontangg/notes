@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150103220738) do
+ActiveRecord::Schema.define(version: 20160316191643) do
 
   create_table "attempts", force: true do |t|
     t.integer  "user_id"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20150103220738) do
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "phase",      default: 0
+    t.string   "name"
   end
 
   create_table "guesses", force: true do |t|
@@ -52,6 +54,7 @@ ActiveRecord::Schema.define(version: 20150103220738) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "group_id"
+    t.boolean  "admin"
   end
 
 end
