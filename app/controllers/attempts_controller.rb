@@ -7,7 +7,7 @@ class AttemptsController < ApplicationController
   def create
     @attempt = current_user.attempts.build(attempt_params)
 
-    @attempt.competition_id = competition.id
+    @attempt.competition_id = current_competition.id
 
     if @attempt.valid?
       songs = Song.all
@@ -30,16 +30,12 @@ class AttemptsController < ApplicationController
 
   private
 
-  def competition
-    @competition || @competition = Competition.find_by(active:true)
-  end
-
   def prepare_attempt
     @users = User.order(:name)
-    songs = competition.songs.order('random()')
+    songs = current_competition.songs.order('random()')
 
     # Get a list of all attempts (except ones that we recently failed to save because they were invalid)
-    prev_attempts = current_user.group_attempts.where(competition_id:competition.id).reject { |a| a.new_record? }
+    prev_attempts = current_user.group_attempts.where(competition_id:current_competition.id).reject { |a| a.new_record? }
     @already_attempted_today = prev_attempts && prev_attempts.any? && prev_attempts.last.created_at.today?
     attempt_count = prev_attempts.size
 

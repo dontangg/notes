@@ -16,17 +16,22 @@ html
         ul
           li.user-nav style="background-image:url('#{gravatar_url(current_user.email, 66)}')"
             = current_user.name
-          / NOTE: This link should be there after all the songs have been submited
-          li
-            = link_to_unless_current("new guess", { controller: "attempts", action: "new" }) do
-              span new guess
-          li
-            = link_to_unless_current("scorecard", { controller: "users", action: "scorecard" }) do
-              span scorecard
-          / NOTE: This link should only be there before the guessing has started because it allows them to change their songs
-          /li
-          /  = link_to_unless_current("my songs", { controller: "songs", action: "index" }) do
-          /    span my songs
+          - if @current_competition && @current_competition.guessing?
+            li
+              = link_to_unless_current("new guess", { controller: "attempts", action: "new" }) do
+                span new guess
+          - if @current_competition
+            li
+              = link_to_unless_current("scorecard", { controller: "users", action: "scorecard" }) do
+                span scorecard
+          - if @current_competition && !@current_competition.guessing?
+            li
+              = link_to_unless_current("my songs", { controller: "songs", action: "index" }) do
+                span my songs
+          - if @current_user.admin?
+            li
+              = link_to_unless_current("competitions", { controller: "competitions", action: "index" }) do
+                span competitions
           li
             = link_to "sign out", sign_out_path
         button#hide-menu-btn

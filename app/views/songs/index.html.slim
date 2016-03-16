@@ -15,5 +15,5 @@ ul.no-bull.song-list
             source src="#{song.hls_url}" type="application/x-mpegURL"
             source src="#{song.mp3_url}" type="audio/mpeg"
 
-/ NOTE: This link should only be active when people are allowed to submit songs
-/p = link_to 'new song', new_song_path
+- if @current_competition.submitting?
+  p = link_to 'new song', new_song_path

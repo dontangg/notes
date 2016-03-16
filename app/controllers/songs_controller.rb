@@ -2,10 +2,17 @@ class SongsController < ApplicationController
   before_action :set_song, only: [:edit, :update, :destroy]
 
   def index
-    competition = Competition.find_by(active:true)
-    # NOTE: allow a specific user to see all the songs once all the songs have been submited to upload them
-    #@songs = (current_user.id == 3 || current_user.id == 1) ? competition.songs.order('random()') : current_user.songs.where(competition_id:competition.id)
-    @songs = current_user.songs.where(competition_id:competition.id)
+    if current_user.admin?
+      group_counts = Hash.new(0)
+      User.all.each do |user|
+        count = user.songs.count(competition_id:current_competition.id)
+        group_counts[user.group_id.nil? ? "u#{user.id}" : "g#{user.group_id}"] += count
+      end
+      if group_counts.all? { |_,val| val == 2 }
+        @songs = current_competition.songs.order('random()')
+      end
+    end
+    @songs ||= current_user.songs.where(competition_id:current_competition.id)
   end
 
   def new
@@ -18,8 +25,7 @@ class SongsController < ApplicationController
   def create
     song = current_user.songs.build(song_params)
 
-    competition = Competition.find_by(active:true)
-    song.competition_id = competition.id
+    song.competition_id = current_competition.id
 
     song.upload(params[:song][:file]) if song.valid?
 
