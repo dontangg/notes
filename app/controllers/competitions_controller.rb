@@ -2,7 +2,7 @@ class CompetitionsController < ApplicationController
   before_action :set_competition, only: [:edit, :update, :destroy]
 
   def index
-    @competitions = Competition.all
+    @competitions = Competition.all.order(:created_at)
   end
 
   def new
