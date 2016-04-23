@@ -5,7 +5,7 @@ class SongsController < ApplicationController
     if current_user.admin?
       group_counts = Hash.new(0)
       User.all.each do |user|
-        count = user.songs.count(competition_id:current_competition.id)
+        count = user.songs.where(competition_id:current_competition.id).count
         group_counts[user.group_id.nil? ? "u#{user.id}" : "g#{user.group_id}"] += count
       end
       if group_counts.all? { |_,val| val == 2 }
