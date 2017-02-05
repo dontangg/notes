@@ -38,7 +38,9 @@ namespace :deploy do
     # This will run on all app servers 1 at a time waiting 5 seconds between each one
     on roles(:app), in: :sequence, wait: 5 do
       within current_path do
-        pidfile = shared_path.join('pids', 'unicorn.pid')
+        pids_path = shared_path.join('pids')
+        execute :mkdir, "-p #{pids_path}"
+        pidfile = pids_path.join('unicorn.pid')
 
         # if the pid file exists then we need to restart the server
         if test "[ -f #{pidfile} ]"
