@@ -2,7 +2,7 @@
 # To setup access to a private repo, check under 'From our servers to the repository host' here: http://www.capistranorb.com/documentation/getting-started/authentication-and-authorisation/#toc_2
 
 set :application, 'notes'
-set :repo_url, 'git@github.com:dontangg/notes.git'
+set :repo_url, 'https://github.com/dontangg/notes.git'
 
 # To have it deploy the branch that you're currently on
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
@@ -17,7 +17,8 @@ set :scm, :git
 # set :log_level, :debug
 # set :pty, true
 
-set :linked_files, %w{config/newrelic.yml config/aws.yml}
+#set :linked_files, %w{config/newrelic.yml config/aws.yml}
+set :linked_files, %w{config/aws.yml}
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

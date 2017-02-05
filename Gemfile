@@ -85,7 +85,7 @@ group :production do
   gem 'pg', '~> 0.17.0', group: :production
 
   # Use New Relic for monitoring
-  gem 'newrelic_rpm'
+  #gem 'newrelic_rpm'
 end
 
 # Use debugger
