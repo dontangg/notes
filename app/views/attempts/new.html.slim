@@ -34,7 +34,7 @@ h1 guess
     p You already guessed today.
     p You can guess again in #{distance_of_time_in_words(Time.zone.now, Time.zone.now.tomorrow.beginning_of_day)}.
   - else
-    p You have #{distance_of_time_in_words(Time.zone.now, Time.zone.now.tomorrow.beginning_of_day)} left to make an attempt today.
+    p You have #{distance_of_time_in_words(Time.zone.now, Time.zone.now.tomorrow.beginning_of_day)} left to guess today.
   / NOTE: This link should only be available after the guessing has started
   p = submit_tag 'submit guess', {disabled: @already_attempted_today}
 
