@@ -39,6 +39,8 @@ class AttemptsController < ApplicationController
     @already_attempted_today = prev_attempts && prev_attempts.any? && prev_attempts.last.created_at.today?
     attempt_count = prev_attempts.size
 
+    @time_until_next_attempt = Date.tomorrow
+
     # Make a list of all guesses (all songs)
     all_guesses = prev_attempts.to_a.flat_map { |att| att.guesses }
 
