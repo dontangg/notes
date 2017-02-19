@@ -2,6 +2,7 @@ class Song < ActiveRecord::Base
   S3_BUCKET_NAME = "wilson-notes"
 
   belongs_to :user
+  belongs_to :competition
 
   validates_presence_of :name
   validates_presence_of :artist

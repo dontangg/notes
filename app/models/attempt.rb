@@ -4,4 +4,6 @@ class Attempt < ActiveRecord::Base
   belongs_to :user
   has_many :guesses, dependent: :destroy
   accepts_nested_attributes_for :guesses
+
+  attr_accessor :correctly_guessed_names
 end

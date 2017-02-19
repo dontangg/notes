@@ -33,6 +33,7 @@ p {
 }
 
 a {
+  cursor: pointer;
   color: $link-color;
 }
 
@@ -76,3 +77,6 @@ header {
   padding: 10px 20px;
 }
 
+.with-horiz-padding {
+  padding: 0 10px;
+}

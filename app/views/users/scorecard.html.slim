@@ -9,8 +9,13 @@ ul.no-bull.scorecard
         h4 guesses
         ol
           - for attempt in group[:attempts]
-            li
-              div #{attempt.correct_count} of #{@song_count} correct
+            li.attempt
+              div
+                | #{attempt.correct_count} of #{@song_count} correct
+                small.with-horiz-padding
+                  a more
+              div.correctly-guessed-names
+                small correct: #{attempt.correctly_guessed_names}
               small #{time_ago_in_words(attempt.created_at)} ago
 
 p = link_to "new guess", new_attempt_url

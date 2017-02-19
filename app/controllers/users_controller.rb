@@ -22,17 +22,22 @@ class UsersController < ApplicationController
     users = User.order(:group_id, :name).includes(:songs)
     group_user_ids = current_user.group_id.nil? ? [current_user.id] : User.where(group_id: current_user.group_id).pluck(:id)
 
-    @song_count = current_competition.songs.where.not(user_id: group_user_ids).count
+    songs = current_competition.songs
+    @song_count = songs.where.not(user_id: group_user_ids).count
 
     @groups = []
     groups_tmp = {} # temporary variable to make it easier to add people to groups
     users.each do |user|
       if user.group_id.nil?
-        @groups << { users: [user], attempts: user.attempts.where(competition_id:current_competition.id) }
+        attempts = user.attempts.where(competition_id:current_competition.id).includes(:guesses)
+        add_correctly_guessed_names(attempts, users, songs)
+        @groups << { users: [user], attempts: attempts }
       else
         group = groups_tmp[user.group_id]
         if group.nil?
-          group = { users: [], attempts: user.group_attempts.where(competition_id:current_competition.id) }
+          attempts = user.group_attempts.where(competition_id:current_competition.id).includes(:guesses)
+          add_correctly_guessed_names(attempts, users, songs)
+          group = { users: [], attempts: attempts }
           @groups << group
           groups_tmp[user.group_id] = group
         end
@@ -51,5 +56,26 @@ class UsersController < ApplicationController
         :password,
         :password_confirmation
       )
+  end
+
+  def add_correctly_guessed_names(attempts, users, songs)
+    attempts.each do |attempt|
+
+      attempt.correctly_guessed_names = ""
+
+      attempt.guesses.each do |guess|
+
+        song = songs.find {|song| song.id == guess.song_id }
+
+        if song.user_id == guess.user_id
+          user = users.find {|user| song.user_id == user.id }
+          attempt.correctly_guessed_names += ", " unless attempt.correctly_guessed_names.empty?
+          attempt.correctly_guessed_names += user.name
+        end
+
+      end
+
+      attempt.correctly_guessed_names = "none" if attempt.correctly_guessed_names.empty?
+    end
   end
 end
