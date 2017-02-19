@@ -3,7 +3,7 @@
 # Set environment to development unless something else is specified
 env = ENV["RAILS_ENV"] || "development"
 
-worker_processes 2 # amount of unicorn workers to spin up
+worker_processes 1 # amount of unicorn workers to spin up
 
 # This is good for Rails and for New Relic
 preload_app true
