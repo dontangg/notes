@@ -23,13 +23,13 @@ class SongsController < ApplicationController
   end
 
   def create
-    song = current_user.songs.build(song_params)
+    @song = current_user.songs.build(song_params)
 
-    song.competition_id = current_competition.id
+    @song.competition_id = current_competition.id
 
-    song.upload(params[:song][:file]) if song.valid?
+    @song.upload(params[:song][:file]) if @song.valid?
 
-    if song.save
+    if @song.save
       redirect_to root_url, notice: "song added!"
     else
       render "new"

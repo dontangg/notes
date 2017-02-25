@@ -2,24 +2,29 @@
 // They will be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#sign-in {
-  padding-top: 30px;
+.form-signin {
+  margin: 0 auto;
+  max-width: 330px;
+  padding: 30px 15px 15px;
   text-align: center;
 
   h1 {
-    margin: 5px 0;
+    margin: 5px 0 30px;
   }
 
-  input {
-    text-align: center;
+  input[type="email"] {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-bottom: -1px;
   }
 
-  form {
-    margin-top: 30px;
+  input[type="password"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  button {
+    margin-top: 20px;
+    margin-bottom: 10px;
   }
 }
-
-.sign-up-link {
-  font-size: 14px;
-}
-

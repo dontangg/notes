@@ -1,38 +1,7 @@
 
 input {
-  border: 0;
-  border-radius: 2px;
-  padding: 5px 10px;
-  width: 100%;
-
   &[type=text], &[type=password], &[type=email] {
-    background: #d9dde0;
     height: 45px;
     font-size: 16px;
   }
-
-  &[type=submit] {
-    -webkit-appearance: none;
-    background: $cta-color;
-    font-size: 21px;
-    height: 50px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-  }
 }
-
-input, textarea {
-  font-family: $font-family;
-  font-weight: $font-weight;
-}
-
-::-webkit-input-placeholder {
-  color: #777;
-  font-weight: 300px;
-}
-
-.error {
-  color: $alert-color;
-  font-size: 14px;
-}
-

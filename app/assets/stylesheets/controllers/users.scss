@@ -10,16 +10,16 @@
     padding: 15px;
   }
 
-  & > p {
-    padding: 0;
-  }
-
   h4 {
     margin: 0;
   }
 
   ol li {
     padding: 5px 0;
+  }
+
+  a {
+    cursor: pointer;
   }
 }
 

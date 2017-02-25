@@ -1,20 +1,19 @@
 = form_for @competition do |f|
   - if @competition.errors.any?
-    .error_messages
-      h2 Form is invalid
+    .alert.alert-danger
+      h4.alert-heading whoops!
       ul
         - for message in @competition.errors.full_messages
           li = message
-  p
+  p.form-group
     = f.label :name, 'name'
     br
-    = f.text_field :name, autocapitalize: 'words'
-  p
-    = f.label :active, 'active'
-    br
-    = f.check_box :active
-  p
+    = f.text_field :name, autocapitalize: 'words', class: 'form-control'
+  p.checkbox
+    = f.label :active
+      = f.check_box :active
+      | active
+  p.form-group
     = f.label :phase, 'phase'
-    br
-    = f.select(:phase, [['Submitting', 0],['Guessing', 1]])
-  p.button = f.submit
+    = f.select(:phase, [['Submitting', 0],['Guessing', 1]], {}, class: 'form-control')
+  p = f.submit class: 'btn btn-lg btn-primary btn-block'

@@ -1,49 +1,73 @@
 doctype html
-html
+html lang="en"
   head
-    title Notes
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE-edge"
     meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     meta name="apple-mobile-web-app-capable" content="yes"
     meta name="apple-mobile-web-app-status-bar-style" content="black"
-    link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,300,400italic,400,600italic,600,700italic,700,800italic,800" rel="stylesheet" type="text/css"
+
+    title Notes
+
+    /link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,300,400italic,400,600italic,600,700italic,700,800italic,800" rel="stylesheet" type="text/css"
+    link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+    
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
   body
 
-    - if current_user
-      nav#menu
-        ul
-          li.user-nav style="background-image:url('#{gravatar_url(current_user.email, 66)}')"
-            = current_user.name
-          - if @current_competition && @current_competition.guessing?
-            li
-              = link_to_unless_current("new guess", { controller: "attempts", action: "new" }) do
-                span new guess
-          - if @current_competition
-            li
-              = link_to_unless_current("scorecard", { controller: "users", action: "scorecard" }) do
-                span scorecard
-          - if @current_competition && !@current_competition.guessing?
-            li
-              = link_to_unless_current("my songs", { controller: "songs", action: "index" }) do
-                span my songs
-          - if @current_user.admin?
-            li
-              = link_to_unless_current("competitions", { controller: "competitions", action: "index" }) do
-                span competitions
-          li
-            = link_to "sign out", sign_out_path
-        button#hide-menu-btn
-
-      header
-        button#menu-btn
-        | notes
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          - if current_user
+            button.navbar-toggle.collapsed data-toggle="collapse" data-target="#navbar"
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+          a.navbar-brand href="/" notes
+        #navbar.navbar-collapse.collapse
+          - if current_user
+            ul.nav.navbar-nav
+              - if @current_competition && @current_competition.guessing?
+                li class=('active' if current_page?({ controller: "attempts", action: "new" }))
+                  = link_to("new guess", { controller: "attempts", action: "new" })
+              - if @current_competition
+                li class=('active' if current_page?({ controller: "users", action: "scorecard" }))
+                  = link_to("scorecard", { controller: "users", action: "scorecard" })
+              - if @current_competition && !@current_competition.guessing?
+                li class=('active' if current_page?({ controller: "songs", action: "index" }))
+                  = link_to("my songs", { controller: "songs", action: "index" })
+              - if current_user.admin?
+                li class=('active' if current_page?({ controller: "competitions", action: "index" }))
+                  = link_to("competitions", { controller: "competitions", action: "index" })
+              li.visible-xs-block
+                = link_to "sign out", sign_out_path
+            ul.nav.navbar-nav.navbar-right.hidden-xs
+              li.dropdown
+                a.user-nav href="#" class="dropdown-toggle" data-toggle="dropdown" style="background-image:url('#{gravatar_url(current_user.email, 66)}')"
+                  span => current_user.name
+                  .caret
+                ul.dropdown-menu
+                  li
+                    = link_to "sign out", sign_out_path
 
     - if flash.key?(:alert)
-      #flash-alert = flash[:alert]
+      .container
+        .alert.alert-danger data-dismiss="alert"
+          = flash[:alert]
+          button.close data-dismiss="alert"
+            span &times;
+
     - if flash.key?(:notice)
-      #flash-notice = flash[:notice]
+      .container
+        .alert.alert-info data-dismiss="alert"
+          = flash[:notice]
+          button.close data-dismiss="alert"
+            span &times;
+    .container
+      = yield
 
-    = yield
-
+  script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"
+  script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"

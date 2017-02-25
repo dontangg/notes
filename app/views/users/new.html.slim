@@ -2,28 +2,29 @@ h1 new account
 
 = form_for @user do |f|
   - if @user.errors.any?
-    .error_messages
-      h2 Form is invalid
+    .alert.alert-danger
+      h4.alert-heading whoops!
       ul
         - for message in @user.errors.full_messages
           li = message
-  p
+  p.form-group
     = f.label :name, 'name'
     br
-    = f.text_field :name, autocapitalize: 'words'
-  p
+    = f.text_field :name, autocapitalize: 'words', class: 'form-control'
+  p.form-group
     = f.label :email, 'email'
     br
-    = f.email_field :email
-  p
+    = f.email_field :email, class: 'form-control'
+  p.form-group
     = f.label :password, 'password'
     br
-    = f.password_field :password
-  p
+    = f.password_field :password, class: 'form-control'
+  p.form-group
     = f.label :password_confirmation, 'confirm password'
     br
-    = f.password_field :password_confirmation
-  p.button = f.submit 'create account'
+    = f.password_field :password_confirmation, class: 'form-control'
+
+  p = f.submit 'create account', class: 'btn btn-lg btn-primary btn-block'
 
   p = link_to "sign in", sign_in_path
 
