@@ -4,7 +4,16 @@ ul.no-bull.scorecard
   - for group in @groups
     li
       - for user in group[:users]
-        p #{user.name} submitted #{pluralize(user.songs.where(competition_id:@current_competition.id).size, 'song')}
+        p #{user.name} submitted #{pluralize(user.songs.where(competition_id:@competition.id).size, 'song')}
+        - if @show_song_names
+          - for song in user.songs.where(competition_id:@competition.id)
+            div.song-list
+              | #{song.name} by #{song.artist}
+              - if song.file_name.present?
+                .audio-container
+                  audio(controls)
+                    source src="#{song.hls_url}" type="audio/mpeg"
+                    source src="#{song.mp3_url}" type="audio/mpeg"
       - if group[:attempts].any?
         h4 guesses
         ol

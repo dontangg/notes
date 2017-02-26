@@ -3,6 +3,10 @@ class CompetitionsController < ApplicationController
 
   def index
     @competitions = Competition.all.order(:created_at)
+
+    unless current_user.admin?
+      @competitions = @competitions.where(phase: 2)
+    end
   end
 
   def new
@@ -36,7 +40,6 @@ class CompetitionsController < ApplicationController
     @competition.destroy
     redirect_to competitions_url
   end
-
 
   private
 

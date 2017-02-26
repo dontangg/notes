@@ -19,23 +19,27 @@ class UsersController < ApplicationController
   end
 
   def scorecard
+    @competition = params[:competition_id].present? ? Competition.find(params[:competition_id]) : current_competition
+
     users = User.order(:group_id, :name).includes(:songs)
     group_user_ids = current_user.group_id.nil? ? [current_user.id] : User.where(group_id: current_user.group_id).pluck(:id)
 
-    songs = current_competition.songs
+    songs = @competition.songs
     @song_count = songs.where.not(user_id: group_user_ids).count
+
+    @show_song_names = !@competition.active?
 
     @groups = []
     groups_tmp = {} # temporary variable to make it easier to add people to groups
     users.each do |user|
       if user.group_id.nil?
-        attempts = user.attempts.where(competition_id:current_competition.id).includes(:guesses)
+        attempts = user.attempts.where(competition_id:@competition.id).includes(:guesses)
         add_correctly_guessed_names(attempts, users, songs)
         @groups << { users: [user], attempts: attempts }
       else
         group = groups_tmp[user.group_id]
         if group.nil?
-          attempts = user.group_attempts.where(competition_id:current_competition.id).includes(:guesses)
+          attempts = user.group_attempts.where(competition_id:@competition.id).includes(:guesses)
           add_correctly_guessed_names(attempts, users, songs)
           group = { users: [], attempts: attempts }
           @groups << group

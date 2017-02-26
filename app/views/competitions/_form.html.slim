@@ -15,5 +15,5 @@
       | active
   p.form-group
     = f.label :phase, 'phase'
-    = f.select(:phase, [['Submitting', 0],['Guessing', 1]], {}, class: 'form-control')
+    = f.select(:phase, [['Submitting', 0],['Guessing', 1],['Closed', 2]], {}, class: 'form-control')
   p = f.submit class: 'btn btn-lg btn-primary btn-block'

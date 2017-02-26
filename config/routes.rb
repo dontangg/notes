@@ -4,6 +4,7 @@ Notes::Application.routes.draw do
   get "sign_out" => "sessions#destroy", as: "sign_out"
   get "sign_up" => "users#new", as: "sign_up"
   get "scorecard" => "users#scorecard", as: "scorecard"
+  get "scorecard/:competition_id" => "users#scorecard", as: "scorecard_by_id"
 
   root to: "home#index"
 

@@ -5,10 +5,17 @@ ul.no-bull.competition-list
     li
       .competition-name = competition.name
       .competition-detail = competition.active? ? "Active" : "Inactive"
-      .competition-detail = competition.guessing? ? "Guessing" : "Submitting"
+      .competition-detail
+        | phase:
+        =< competition.phase_name
       .actions
-        => link_to 'edit', edit_competition_path(competition)
-        | or
-        =< link_to 'delete', competition, method: :delete, data: { confirm: 'Are you sure?' }
+        - if current_user.admin?
+          => link_to 'edit', edit_competition_path(competition)
+          | or
+          =<> link_to 'delete', competition, method: :delete, data: { confirm: 'Are you sure?' }
+          | or
+        =< link_to 'scorecard', scorecard_by_id_path(competition.id)
 
-p = link_to 'new competition', new_competition_path
+
+- if current_user.admin?
+  p = link_to 'new competition', new_competition_path
