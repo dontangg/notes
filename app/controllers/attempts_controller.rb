@@ -36,8 +36,15 @@ class AttemptsController < ApplicationController
 
     # Get a list of all attempts (except ones that we recently failed to save because they were invalid)
     prev_attempts = current_user.group_attempts.where(competition_id:current_competition.id).reject { |a| a.new_record? }
-    @already_attempted_today = prev_attempts && prev_attempts.any? && prev_attempts.last.created_at.today?
     attempt_count = prev_attempts.size
+
+    already_attempted_today = prev_attempts && prev_attempts.any? && prev_attempts.last.created_at.today?
+    @disallow_attempt = already_attempted_today
+    if already_attempted_today
+      first_attempt = current_competition.attempts.order(:created_at).first
+      num_guesses_allowed = (Date.today - first_attempt.created_at).ceil + 1
+      @disallow_attempt = attempt_count >= num_guesses_allowed
+    end
 
     # Make a list of all guesses (all songs)
     all_guesses = prev_attempts.to_a.flat_map { |att| att.guesses }

@@ -33,12 +33,12 @@ h1 guess
 
         = f2.hidden_field :song_id
 
-  - if @already_attempted_today
-    p You already guessed today.
+  - if @disallow_attempt
+    p You have already made your guesses.
     p You can guess again in #{distance_of_time_in_words(Time.zone.now, Time.zone.now.tomorrow.beginning_of_day)}.
   - else
-    p You have #{distance_of_time_in_words(Time.zone.now, Time.zone.now.tomorrow.beginning_of_day)} left to guess today.
+    p You have #{distance_of_time_in_words(Time.zone.now, Time.zone.now.tomorrow.beginning_of_day)} left to guess today. If you don't, you'll be able to make an extra guess tomorrow!
 
   / NOTE: This link should only be available after the guessing has started
-  p = submit_tag 'submit guess', {disabled: @already_attempted_today, class: "btn btn-lg btn-primary btn-block"}
+  p = submit_tag 'submit guess', {disabled: @disallow_attempt, class: "btn btn-lg btn-primary btn-block"}
 
