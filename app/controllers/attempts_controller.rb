@@ -42,7 +42,7 @@ class AttemptsController < ApplicationController
     @disallow_attempt = already_attempted_today
     if already_attempted_today
       first_attempt = current_competition.attempts.order(:created_at).first
-      num_guesses_allowed = (Date.today - first_attempt.created_at.to_date).ceil + 1
+      num_guesses_allowed = (Time.zone.today - first_attempt.created_at.to_date).ceil
       @disallow_attempt = attempt_count >= num_guesses_allowed
     end
 
