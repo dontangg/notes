@@ -10,7 +10,7 @@ class Attempt < ActiveRecord::Base
   attr_accessor :correctly_guessed_names
 
   # This doesn't work anymore now that we're allowing people who got behind to submit multiple guesses in
-  # one day to catch up with everyone else. So, we're relying on the
+  # one day to catch up with everyone else. So, we're relying on the controller to catch them.
   #
   # def only_one_attempt_per_day
   #   prev_attempts = user.group_attempts.where(competition_id:competition_id).reject { |a| a.new_record? }
