@@ -7,6 +7,10 @@ A site to host a competition to guess who likes that song among friends.
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
+To start postgres:
+
+```sudo -u  postgres /usr/bin/postgres95 -D /var/lib/pgsql95/data &```
+
 Things you may want to cover:
 
 * Ruby version
