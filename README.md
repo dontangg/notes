@@ -7,9 +7,17 @@ A site to host a competition to guess who likes that song among friends.
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-To start postgres:
+Start postgres:
 
 ```sudo -u  postgres /usr/bin/postgres95 -D /var/lib/pgsql95/data &```
+
+Start nginx:
+
+```sudo nginx```
+
+Start rails:
+
+```bundle exec unicorn_rails -c config/unicorn.rb -D```
 
 Things you may want to cover:
 
