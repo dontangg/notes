@@ -4,7 +4,15 @@ class SongsController < ApplicationController
   def index
     if current_user.admin?
       group_counts = Hash.new(0)
-      User.all.each do |user|
+
+      # Kyle (id 14) started in competition 9 and Deanna's (id 12) last was competition 8
+      if current_competition.id < 9
+        users = User.all.where('id < 14')
+      else
+        users = User.all.where.not(id: 12)
+      end
+
+      users.each do |user|
         count = user.songs.where(competition_id:current_competition.id).count
         group_counts[user.group_id.nil? ? "u#{user.id}" : "g#{user.group_id}"] += count
       end

@@ -32,6 +32,14 @@ class AttemptsController < ApplicationController
 
   def prepare_attempt
     @users = User.order(:name)
+
+    # Kyle (id 14) started in competition 9 and Deanna's (id 12) last was competition 8
+    if current_competition.id < 9
+      @users = @users.where('id < 14')
+    else
+      @users = @users.where.not(id: 12)
+    end
+
     songs = current_competition.songs.order('random()')
 
     # Get a list of all attempts (except ones that we recently failed to save because they were invalid)

@@ -22,6 +22,14 @@ class UsersController < ApplicationController
     @competition = params[:competition_id].present? ? Competition.find(params[:competition_id]) : current_competition
 
     users = User.order(:group_id, :name).includes(:songs)
+
+    # Kyle (id 14) started in competition 9 and Deanna's (id 12) last was competition 8
+    if @competition.id < 9
+      users = users.where('id < 14')
+    else
+      users = users.where.not(id: 12)
+    end
+    
     group_user_ids = current_user.group_id.nil? ? [current_user.id] : User.where(group_id: current_user.group_id).pluck(:id)
 
     songs = @competition.songs
